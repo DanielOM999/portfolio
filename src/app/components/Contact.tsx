@@ -1,91 +1,173 @@
 'use client'
 
 import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
+import {
+  Loader2,
+  Check
+} from 'lucide-react'
+import Button from '@/src/app/components/ui/button'
+import { Input } from '@/src/app/components/ui/input'
+import { Label } from '@/src/app/components/ui/label'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle
+} from '@/src/app/components/ui/dialog'
 
-export default function Contact() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-  })
+interface ContactModalProps {
+  isOpen: boolean
+  onClose: () => void
+  clickPosition?: { x: number; y: number }
+}
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData(prevData => ({ ...prevData, [name]: value }))
-  }
+export default function Contact({
+  isOpen,
+  onClose,
+  clickPosition = { x: 0, y: 0 }
+}: ContactModalProps) {
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [message, setMessage] = useState('')
+  const [isSuccess, setIsSuccess] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    // Handle form submission here (e.g., send data to an API)
-    console.log('Form submitted:', formData)
-    // Reset form after submission
-    setFormData({ name: '', email: '', message: '' })
+  const handleSubmit = () => {
+    if (!name || !email || !message) {
+      alert('Please fill in all fields')
+      return
+    }
+    setIsLoading(true)
+
+    setTimeout(() => {
+      setIsLoading(false)
+      setIsSuccess(true)
+    }, 2000)
   }
 
   return (
-    <section id="contact" className="py-20 bg-gray-900">
-      <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold mb-12 text-center">Get in Touch</h2>
-        <motion.form
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          onSubmit={handleSubmit}
-          className="max-w-lg mx-auto"
+    <Dialog
+      open={isOpen}
+      onOpenChange={() => {
+        onClose()
+      }}
+    >
+      <DialogContent className='w-full text-white md:w-3/5 lg:w-2/4 xl:w-1/4'>
+        <DialogHeader>
+          <DialogTitle>Contact Me</DialogTitle>
+          <DialogDescription>
+            I&apos;d love to hear from you! Fill out the form below to get in touch.
+          </DialogDescription>
+        </DialogHeader>
+        <motion.div
+          initial={{
+            scale: 0,
+            x: clickPosition.x - window.innerWidth / 2.5,
+            y: clickPosition.y - window.innerHeight / 2
+          }}
+          animate={{ scale: 1, x: 0, y: 0 }}
+          exit={{ scale: 0, x: clickPosition.x, y: clickPosition.y }}
+          transition={{ duration: 0.5, ease: 'easeInOut' }}
+          className='space-y-6'
         >
-          <div className="mb-6">
-            <label htmlFor="name" className="block text-sm font-medium mb-2">
-              Name
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-              className="w-full px-3 py-2 text-gray-900 bg-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-          <div className="mb-6">
-            <label htmlFor="email" className="block text-sm font-medium mb-2">
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              className="w-full px-3 py-2 text-gray-900 bg-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-          <div className="mb-6">
-            <label htmlFor="message" className="block text-sm font-medium mb-2">
-              Message
-            </label>
-            <textarea
-              id="message"
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-              required
-              rows={4}
-              className="w-full px-3 py-2 text-gray-900 bg-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            ></textarea>
-          </div>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            type="submit"
-            className="w-full px-6 py-3 bg-blue-500 text-white rounded-full font-semibold hover:bg-blue-600 transition duration-300"
-          >
-            Send Message
-          </motion.button>
-        </motion.form>
-      </div>
-    </section>
+          <AnimatePresence mode='wait'>
+            {isLoading ? (
+              <motion.div
+                key='loading'
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className='flex flex-col items-center justify-center space-y-4'
+              >
+                <Loader2 className='h-12 w-12 animate-spin text-secondary' />
+                <p className='text-lg font-semibold'>Sending your message...</p>
+              </motion.div>
+            ) : isSuccess ? (
+              <motion.div
+                key='success'
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className='flex flex-col items-center justify-center space-y-4'
+              >
+                <div className='rounded-full bg-green-500 p-2'>
+                  <Check className='h-8 w-8 text-white' />
+                </div>
+                <p className='text-lg font-semibold'>
+                  Your message was sent successfully!
+                </p>
+                <Button
+                  onClick={() => {
+                    onClose()
+                    setIsSuccess(false) // Reset success state
+                    setName('')
+                    setEmail('')
+                    setMessage('')
+                  }}
+                  className='mt-4'
+                >
+                  Close
+                </Button>
+              </motion.div>
+            ) : (
+              <motion.div
+                key='form'
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+              >
+                <div className='space-y-4'>
+                  <div>
+                    <Label htmlFor='name'>Your Name</Label>
+                    <Input
+                      id='name'
+                      type='text'
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      placeholder='Enter your name'
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor='email'>Your Email</Label>
+                    <Input
+                      id='email'
+                      type='email'
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder='Enter your email'
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor='message'>Your Message</Label>
+                    <textarea
+                      id='message'
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
+                      placeholder='Enter your message'
+                      rows={4}
+                      className='w-full rounded-md border border-secondary-active bg-black/50 p-3 text-white'
+                    />
+                  </div>
+                </div>
+
+                <div className='flex justify-end space-x-2 mt-4'>
+                  <Button variant='outline' onClick={onClose}>
+                    Cancel
+                  </Button>
+                  <Button
+                    onClick={handleSubmit}
+                    className='bg-secondary text-black hover:bg-secondary-dark'
+                  >
+                    Send Message
+                  </Button>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
+      </DialogContent>
+    </Dialog>
   )
 }

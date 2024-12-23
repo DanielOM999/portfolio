@@ -19,7 +19,7 @@ export default function Hero({ onExplore }: HeroProps) {
         transition={{ duration: 0.8 }}
         className="flex-1 z-10"
       >
-        <h1 className="text-5xl font-bold mb-4">Hi, I'm Daniel!</h1>
+        <h1 className="text-5xl font-bold mb-4">Hi, I&apos;m Daniel!</h1>
         <TypeAnimation
           sequence={[
             'I turn blank screens into 3D worlds',

@@ -1,10 +1,20 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, Dispatch, SetStateAction } from 'react'
 import Link from 'next/link'
 import { Menu, X } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Button from '@/src/app/components/ui/button'
 
-export default function Header() {
+interface StartContactProps {
+  setIsContact: Dispatch<SetStateAction<boolean>>
+  isContact: boolean
+  setClickPosition: Dispatch<SetStateAction<{ x: number; y: number }>>
+  onHero: () => void
+  onSkills: () => void
+  onWork: () => void
+  onAbout: () => void
+}
+
+export default function Header({ setIsContact, isContact, setClickPosition, onHero, onSkills, onWork, onAbout }: StartContactProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
 
@@ -21,6 +31,11 @@ export default function Header() {
     }
   }, [])
 
+  const handleContactToggle = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setClickPosition({ x: event.clientX, y: event.clientY })
+    setIsContact(!isContact)
+  }
+
   return (
     <header className='fixed top-0 z-50 w-full'>
       <nav className='container mx-auto px-14 py-5'>
@@ -30,31 +45,39 @@ export default function Header() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <Link
-              href='/'
+            <button
+            onClick={onHero}
               className='flex items-center gap-2 text-xl font-bold'
             >
               DanielOM999
-            </Link>
+            </button>
           </motion.div>
 
           <div className='hidden items-center gap-8 md:flex'>
             <div className='flex gap-6'>
-              {['Skills', 'Work'].map((item, index) => (
-                <motion.div
-                  key={item}
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                >
-                  <Link
-                    href={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
-                    className='transition-colors hover:text-white/85'
+              {['Skills', 'Work', 'About'].map((item, index) => {
+                const handleClick = () => {
+                  if (item === 'Skills') onSkills();
+                  if (item === 'Work') onWork();
+                  if (item === 'About') onAbout();
+                };
+
+                return (
+                  <motion.div
+                    key={item}
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
                   >
-                    {item}
-                  </Link>
-                </motion.div>
-              ))}
+                    <button
+                      onClick={handleClick}
+                      className='transition-colors hover:text-white/85'
+                    >
+                      {item}
+                    </button>
+                  </motion.div>
+                );
+              })}
             </div>
             <motion.div
               initial={{ opacity: 0, scale: 0.5 }}
@@ -64,11 +87,13 @@ export default function Header() {
               <Button
                 variant='outline'
                 className='border-secondary text-secondary hover:bg-primary hover:text-black'
+                onClick={handleContactToggle}
               >
                 Contact
               </Button>
             </motion.div>
           </div>
+
 
           <div className='relative md:hidden'>
             <motion.button

@@ -40,14 +40,21 @@ body {
 }
 
 .mask-image {
-  -webkit-mask-image: url(/img/crack.png);
-  mask-image: url(/img/crack.png);
+  -webkit-mask-image: url(/img/mask3.png);
+  mask-image: url(/img/mask3.png);
+  
   -webkit-mask-size: contain;
   mask-size: contain;
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
   -webkit-mask-position: center;
   mask-position: center;
+  mask-mode: luminance;
+}
+
+.about-bg {
+  background: rgb(15,22,35);
+  background: linear-gradient(180deg, rgba(15,22,35,1) 0%, rgba(17,24,39,1) 100%);
 }
 
 @layer utilities {
