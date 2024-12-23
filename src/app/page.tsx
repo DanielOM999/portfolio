@@ -6,7 +6,6 @@ import Lenis from "lenis"
 import Hero from '@/src/app/components/Hero'
 import Skills from '@/src/app/components/Skills'
 import Projects from '@/src/app/components/Prosjects'
-import About from '@/src/app/components/About'
 import Header from '@/src/app/components/Header'
 import Footer from '@/src/app/components/Footer'
 
@@ -22,8 +21,6 @@ export default function Home() {
 
   const skillsRef = useRef<HTMLDivElement>(null)
   const projectsRef = useRef<HTMLDivElement>(null)
-  const aboutRef = useRef<HTMLDivElement>(null)
-  const contactRef = useRef<HTMLDivElement>(null)
 
   const scrollToSection = (ref: React.RefObject<HTMLDivElement | null>) => {
     ref.current?.scrollIntoView({ behavior: 'smooth' })
@@ -34,13 +31,12 @@ export default function Home() {
       <Header />
       <Hero onExplore={() => scrollToSection(skillsRef)} />
       <motion.div ref={skillsRef}>
-        <Skills />
+        <div className="overflow-x-hidden">
+          <Skills />
+        </div>
       </motion.div>
       <motion.div ref={projectsRef}>
         <Projects />
-      </motion.div>
-      <motion.div ref={aboutRef}>
-        <About onContact={() => scrollToSection(contactRef)} />
       </motion.div>
       <Footer />
     </main>

@@ -1,7 +1,8 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { Progress } from "@/src/app/components/ui/progress"
+import { useRef, useState } from 'react'
+import { motion, AnimatePresence, useInView } from 'framer-motion'
+import { ChevronDown } from 'lucide-react'
 import {
   SiHtml5,
   SiCss3,
@@ -18,10 +19,23 @@ import {
   SiMongodb,
   SiGit,
   SiRedux,
-  SiTailwindcss
+  SiTailwindcss,
+  SiQt,
+  SiAdobephotoshop,
+  SiAdobeillustrator,
+  SiAdobexd,
+  SiDotnet,
+  SiSocketdotio,
+  SiNginx,
+  SiEjs,
+  SiJquery,
+  SiNpm,
+  SiUnrealengine
 } from 'react-icons/si'
-import { PiFileCSharp as SiCSharp } from "react-icons/pi";
-import { FaJava as SiJava } from "react-icons/fa";
+import { PiFileCSharp as SiCSharp } from "react-icons/pi"
+import { FaJava as SiJava } from "react-icons/fa"
+import { FaNodeJs as SiNodeJs } from "react-icons/fa"
+import { DiMysql as SiMysql } from "react-icons/di"
 
 interface Skill {
   name: string
@@ -34,16 +48,72 @@ interface SkillCategory {
   skills: Skill[]
 }
 
+const SkillCard = ({ skill, index }: { skill: Skill; index: number }) => {
+  const Icon = skill.icon
+  
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.6, y: 20 }}
+      animate={{ opacity: 1, scale: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.6, y: 20 }}
+      transition={{
+        duration: 0.4,
+        delay: index * 0.05,
+        ease: [0.23, 1, 0.32, 1]
+      }}
+      className="group relative"
+    >
+      <div className="p-4 rounded-lg bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 hover:border-blue-500/50 transition-all duration-300 group-hover:bg-gray-700/50 group-hover:transform group-hover:scale-105">
+        <div className="flex flex-col items-center gap-2">
+          <motion.div
+            animate={{
+              rotate: [0, 10, -10, 0],
+              scale: [1, 1.1, 1]
+            }}
+            transition={{
+              duration: 0.5,
+              delay: index * 0.05,
+              ease: "easeInOut"
+            }}
+          >
+            <Icon className="w-8 h-8 text-blue-400 group-hover:text-blue-300 transition-colors" />
+          </motion.div>
+          <span className="text-sm font-medium text-gray-300 group-hover:text-white transition-colors">
+            {skill.name}
+          </span>
+          <motion.div 
+            className="h-1 bg-blue-400/20 rounded-full w-16 overflow-hidden"
+            initial={{ width: 0 }}
+            animate={{ width: "4rem" }}
+            transition={{ duration: 0.6, delay: index * 0.05 }}
+          >
+            <motion.div 
+              className="h-full bg-blue-400"
+              initial={{ width: 0 }}
+              animate={{ width: `${skill.level}%` }}
+              transition={{ duration: 0.8, delay: index * 0.05 }}
+            />
+          </motion.div>
+        </div>
+      </div>
+    </motion.div>
+  )
+}
+
 export default function Skills() {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true })
+  const [openCategory, setOpenCategory] = useState<string | null>(null)
+
   const skillCategories: SkillCategory[] = [
     {
       name: "Programming Languages",
       skills: [
-        { name: "TypeScript", level: 95, icon: SiTypescript },
-        { name: "JavaScript", level: 90, icon: SiJavascript },
-        { name: "Python", level: 85, icon: SiPython },
         { name: "C#", level: 80, icon: SiCSharp },
         { name: "C++", level: 75, icon: SiCplusplus },
+        { name: "JavaScript", level: 90, icon: SiJavascript },
+        { name: "Python", level: 85, icon: SiPython },
+        { name: "TypeScript", level: 95, icon: SiTypescript },
         { name: "Java", level: 70, icon: SiJava },
         { name: "Lua", level: 65, icon: SiLua },
       ]
@@ -51,72 +121,110 @@ export default function Skills() {
     {
       name: "Frontend Development",
       skills: [
+        { name: "HTML5", level: 95, icon: SiHtml5 },
+        { name: "CSS3", level: 90, icon: SiCss3 },
         { name: "React", level: 95, icon: SiReact },
         { name: "Next.js", level: 90, icon: SiNextdotjs },
-        { name: "HTML", level: 95, icon: SiHtml5 },
-        { name: "CSS", level: 90, icon: SiCss3 },
-        { name: "Tailwind", level: 85, icon: SiTailwindcss },
+        { name: "TailwindCSS", level: 85, icon: SiTailwindcss },
         { name: "Redux", level: 80, icon: SiRedux },
+        { name: "jQuery", level: 70, icon: SiJquery },
+        { name: "EJS", level: 65, icon: SiEjs },
       ]
     },
     {
-      name: "Backend & Database",
+      name: "Backend & Databases",
       skills: [
+        { name: "Node.js", level: 90, icon: SiNodeJs },
         { name: "Express.js", level: 85, icon: SiExpress },
+        { name: ".NET", level: 80, icon: SiDotnet },
+        { name: "Socket.io", level: 70, icon: SiSocketdotio },
         { name: "PostgreSQL", level: 80, icon: SiPostgresql },
         { name: "MongoDB", level: 75, icon: SiMongodb },
+        { name: "MySQL", level: 70, icon: SiMysql },
       ]
     },
     {
-      name: "Tools & 3D",
+      name: "Tools & Frameworks",
       skills: [
         { name: "Git", level: 90, icon: SiGit },
+        { name: "Nginx", level: 75, icon: SiNginx },
+        { name: "NPM", level: 70, icon: SiNpm },
+        { name: "Qt", level: 65, icon: SiQt },
+      ]
+    },
+    {
+      name: "Design & 3D Tools",
+      skills: [
         { name: "Blender", level: 85, icon: SiBlender },
+        { name: "Unreal Engine", level: 95, icon: SiUnrealengine },
+        { name: "Adobe Photoshop", level: 80, icon: SiAdobephotoshop },
+        { name: "Adobe Illustrator", level: 75, icon: SiAdobeillustrator },
+        { name: "Adobe XD", level: 70, icon: SiAdobexd },
       ]
     }
   ]
 
   return (
-    <section className="py-20 bg-gray-800/50 backdrop-blur-sm">
+    <section ref={ref} className="py-20 relative overflow-hidden bg-gray-800/50 backdrop-blur-sm">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold mb-12 text-center">Skills & Expertise</h2>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <motion.h2 
+          className="text-4xl font-bold mb-16 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-600"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+        >
+          Skills & Expertise
+        </motion.h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {skillCategories.map((category, categoryIndex) => (
             <motion.div
               key={category.name}
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: categoryIndex * 0.1 }}
-              className="space-y-6"
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
+              className="relative"
             >
-              <h3 className="text-xl font-semibold mb-4">{category.name}</h3>
-              <div className="space-y-4">
-                {category.skills.map((skill, skillIndex) => {
-                  const Icon = skill.icon
-                  return (
-                    <motion.div
-                      key={skill.name}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.5, delay: (categoryIndex * 0.1) + (skillIndex * 0.05) }}
-                      className="space-y-2"
-                    >
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          <Icon className="w-5 h-5 text-gray-400" />
-                          <span className="text-sm font-medium">{skill.name}</span>
-                        </div>
-                        <span className="text-sm text-gray-400">{skill.level}%</span>
-                      </div>
-                      <Progress
-                        value={skill.level}
-                        className="h-2 bg-gray-700"
-                        indicatorClassName="bg-gradient-to-r from-blue-500 to-blue-400"
-                      />
-                    </motion.div>
-                  )
-                })}
-              </div>
+              <motion.button
+                className="w-full text-left p-4 rounded-lg bg-gray-800/80 backdrop-blur-sm border border-gray-700/50 hover:border-blue-500/50 transition-colors flex items-center justify-between group"
+                onClick={() => setOpenCategory(openCategory === category.name ? null : category.name)}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <h3 className="text-xl font-medium text-blue-400 group-hover:text-blue-300 transition-colors">
+                  {category.name}
+                </h3>
+                <motion.div
+                  animate={{ rotate: openCategory === category.name ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <ChevronDown className="w-5 h-5 text-blue-400 group-hover:text-blue-300 transition-colors" />
+                </motion.div>
+              </motion.button>
+
+              <AnimatePresence>
+                {openCategory === category.name && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    className="overflow-hidden"
+                  >
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 p-4">
+                      <AnimatePresence>
+                        {category.skills.map((skill, skillIndex) => (
+                          <SkillCard 
+                            key={skill.name} 
+                            skill={skill} 
+                            index={skillIndex} 
+                          />
+                        ))}
+                      </AnimatePresence>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.div>
           ))}
         </div>
@@ -124,4 +232,3 @@ export default function Skills() {
     </section>
   )
 }
-
