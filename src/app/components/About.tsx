@@ -27,13 +27,13 @@ export default function About({ setIsContact, isContact, setClickPosition }: Abo
         >
           <h2 className="text-4xl font-bold mb-8">About Me</h2>
           <p className="text-lg mb-6">
-            I&apos;m a passionate full-stack developer and 3D designer, currently working on a large file storage and sharing program using Next.js, Tailwind, Node, PostgreSQL, and Redux. I also have experience in setting up servers, including Minecraft servers.
+            I&apos;m Daniel Olov Mostad, an aspiring full-stack developer and 3D designer with a passion for technology and problem-solving. With nearly three years of programming experience, I&apos;ve developed skills in a variety of technologies, including Next.js, Tailwind CSS, Node.js, PostgreSQL, and Redis. I&apos;ve also worked on setting up and managing servers for websites and gaming platforms, such as Minecraft.
           </p>
           <p className="text-lg mb-6">
-            I&apos;m always eager to learn and take on new challenges. Whether it&apos;s programming, 3D design, or exploring new technologies, I&apos;m excited to collaborate and create innovative solutions.
+            My journey began in school, where I delved into programming as a subject, and it has since become my career aspiration. I thrive in both independent and collaborative environments, always bringing a positive, solution-oriented mindset to the table. From creating scalable web applications to automating workflows, I enjoy tackling challenges and delivering innovative solutions.
           </p>
           <p className="text-lg mb-6">
-            When I&apos;m not coding or designing, you can find me exploring the latest advancements in server management and scalable web applications. I believe in the power of continuous learning and staying up-to-date with the ever-evolving tech landscape.
+            Beyond development, I&apos;m deeply interested in server management, IT infrastructure, and exploring the latest advancements in technology. I&apos;m also an outdoor enthusiast who loves rock climbing, hiking, and engaging in creative hobbies like graphic design and sandbox gaming. My goal is to continually grow, learn, and contribute meaningfully to the tech industry.
           </p>
           <motion.div
             whileHover={{ scale: 1.05 }}
