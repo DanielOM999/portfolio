@@ -111,34 +111,38 @@ export default function Header({ setIsContact, isContact, setClickPosition, onHe
             <AnimatePresence>
               {isMenuOpen && (
                 <motion.div
-                  className='absolute right-0 top-full mt-2 w-36 rounded-md p-4 shadow-lg backdrop-blur-md'
+                  className="absolute right-0 top-full mt-2 w-36 rounded-lg p-4 shadow-lg backdrop-blur-sm"
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.3 }}
                   ref={menuRef}
                 >
-                  <div className='flex flex-col gap-4 text-end'>
-                    {['Home', 'About', 'Pricing', 'Contact'].map(
-                      (item, index) => (
+                  <div className="flex flex-col gap-4 text-end">
+                    {['Skills', 'Work', 'About'].map((item, index) => {
+                      const handleClick = () => {
+                        if (item === 'Skills') onSkills();
+                        if (item === 'Work') onWork();
+                        if (item === 'About') onAbout();
+                        setIsMenuOpen(false);
+                      };
+
+                      return (
                         <motion.div
                           key={item}
                           initial={{ opacity: 0, x: 20 }}
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ duration: 0.3, delay: index * 0.1 }}
                         >
-                          <Link
-                            href={
-                              item === 'Home' ? '/' : `/${item.toLowerCase()}`
-                            }
-                            className='transition-colors hover:text-secondary'
-                            onClick={() => setIsMenuOpen(false)}
+                          <button
+                            onClick={handleClick}
+                            className="transition-colors hover:text-secondary"
                           >
                             {item}
-                          </Link>
+                          </button>
                         </motion.div>
-                      )
-                    )}
+                      );
+                    })}
                   </div>
                 </motion.div>
               )}
