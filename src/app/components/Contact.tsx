@@ -16,7 +16,7 @@ import {
   DialogHeader,
   DialogTitle
 } from '@/src/app/components/ui/dialog'
-import { sendEmail } from '@/src/app/components/actions/sendEmail'
+// import { sendEmail } from '@/src/app/components/actions/sendEmail'
 
 interface ContactModalProps {
   isOpen: boolean
@@ -49,13 +49,21 @@ export default function Contact({
     formData.append('message', message)
 
     try {
-      const result = await sendEmail(formData)
-      setIsLoading(false)
-      setIsSuccess(result.success)
+      const response = await fetch('/api/sendEmail', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, email, message }),
+      });
+
+      const result = await response.json();
+      setIsLoading(false);
+      setIsSuccess(result.success);
     } catch (error) {
-      console.error('Failed to send email:', error)
-      setIsLoading(false)
-      alert('Failed to send message. Please try again.')
+      console.error('Failed to send email:', error);
+      setIsLoading(false);
+      alert('Failed to send message. Please try again.');
     }
   }
 
