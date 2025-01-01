@@ -1,5 +1,7 @@
 'use server'
 
+import fs from 'fs';
+import path from 'path';
 import nodemailer from 'nodemailer'
 
 export async function sendEmail(formData: FormData) {
@@ -8,22 +10,29 @@ export async function sendEmail(formData: FormData) {
   const message = formData.get('message') as string
 
   const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
+    host: 'smtp.gmail.com',
     port: parseInt(process.env.SMTP_PORT || '587'),
-    secure: process.env.SMTP_SECURE === 'true',
+    secure: false,
     auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS,
+      user: 'authguard0@gmail.com',
+      pass: "ddln obzr ulhe daaz",
     },
   })
 
   try {
+    const currentDir = process.cwd();
+    const templatePath = path.join(currentDir, 'src', 'app', 'components', 'item', 'contactForm.html');
+    const htmlTemplate = fs.readFileSync(templatePath, 'utf-8');
+    const htmlContent = htmlTemplate.replace('{{name}}', name)
+                                    .replace('{{email}}', email)
+                                    .replace('{{message}}', message);
+
     await transporter.sendMail({
       from: process.env.SMTP_FROM,
       to: 'daniel.mostad1@gmail.com',
       subject: `New message from ${name}`,
       text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
-      html: `<p><strong>Name:</strong> ${name}</p><p><strong>Email:</strong> ${email}</p><p><strong>Message:</strong> ${message}</p>`,
+      html: htmlContent,
     })
 
     return { success: true }

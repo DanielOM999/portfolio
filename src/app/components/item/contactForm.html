@@ -1,0 +1,113 @@
+<html><head>
+<style>
+.email-template {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 30px;
+    background: linear-gradient(145deg, #ffffff, #f5f7fa);
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    font-family: 'Arial', sans-serif;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.logo {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 15px;
+}
+
+.message-content {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    border-left: 4px solid #4a90e2;
+}
+
+.field {
+    margin-bottom: 20px;
+}
+
+.field strong {
+    color: #2c3e50;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.field p {
+    margin: 5px 0;
+    color: #34495e;
+    line-height: 1.6;
+}
+
+.message-field {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 5px;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    color: #7f8c8d;
+    font-size: 12px;
+}
+@keyframes slideIn {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.email-template {
+    animation: slideIn 0.5s ease-out forwards;
+}
+</style>
+</head>
+<body>
+
+<div class="email-template">
+    <div class="header">
+        <svg class="logo" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="45" fill="#4a90e2" />
+            <path d="M35,35 L65,50 L35,65 Z" fill="white" />
+        </svg>
+        <h2>New Contact Message</h2>
+    </div>
+
+    <div class="message-content">
+        <div class="field">
+            <strong>Name:</strong>
+            <p>{{name}}</p>
+        </div>
+
+        <div class="field">
+            <strong>Email:</strong>
+            <p>{{email}}</p>
+        </div>
+
+        <div class="field">
+            <strong>Message:</strong>
+            <div class="message-field">
+                <p>{{message}}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>This message was sent from your portfolio contact form</p>
+    </div>
+</div>
+</body></html>
