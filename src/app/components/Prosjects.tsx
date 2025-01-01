@@ -31,7 +31,7 @@ export default function Projects() {
       description:
         'A website dedicated to ghost hunting and related topics, featuring a forum where users can start discussions and share experiences.',
       technologies: ['JavaScript', 'CSS', 'Handlebars', 'Node.js', 'PostgreSQL', 'Socket.io'],
-      image: '/img/ghost.gif?height=300&width=400',
+      image: '/img/ghost.webp?height=300&width=400',
       link: 'https://github.com/DanielOM999/QuestBros',
     },
     {
