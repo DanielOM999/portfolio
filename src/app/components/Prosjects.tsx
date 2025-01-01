@@ -107,6 +107,7 @@ export default function Projects() {
                       objectFit="cover"
                       className="rounded-xl"
                       priority
+                      unoptimized={project.image.endsWith('.gif')}
                     />
                   </div>
 

@@ -16,7 +16,6 @@ import {
   SiBlender,
   SiExpress,
   SiPostgresql,
-  SiMongodb,
   SiGit,
   SiRedux,
   SiTailwindcss,
@@ -30,7 +29,8 @@ import {
   SiEjs,
   SiJquery,
   SiNpm,
-  SiUnrealengine
+  SiUnrealengine,
+  SiHandlebarsdotjs
 } from 'react-icons/si'
 import { PiFileCSharp as SiCSharp } from "react-icons/pi"
 import { FaJava as SiJava } from "react-icons/fa"
@@ -110,56 +110,56 @@ export default function Skills() {
       name: "Programming Languages",
       skills: [
         { name: "C#", level: 80, icon: SiCSharp },
-        { name: "C++", level: 75, icon: SiCplusplus },
+        { name: "C++", level: 60, icon: SiCplusplus },
         { name: "JavaScript", level: 90, icon: SiJavascript },
-        { name: "Python", level: 85, icon: SiPython },
-        { name: "TypeScript", level: 95, icon: SiTypescript },
-        { name: "Java", level: 70, icon: SiJava },
-        { name: "Lua", level: 65, icon: SiLua },
+        { name: "Python", level: 90, icon: SiPython },
+        { name: "TypeScript", level: 80, icon: SiTypescript },
+        { name: "Java", level: 60, icon: SiJava },
+        { name: "Lua", level: 60, icon: SiLua },
       ]
     },
     {
       name: "Frontend Development",
       skills: [
-        { name: "HTML5", level: 95, icon: SiHtml5 },
+        { name: "HTML5", level: 90, icon: SiHtml5 },
         { name: "CSS3", level: 90, icon: SiCss3 },
-        { name: "React", level: 95, icon: SiReact },
-        { name: "Next.js", level: 90, icon: SiNextdotjs },
-        { name: "TailwindCSS", level: 85, icon: SiTailwindcss },
-        { name: "Redux", level: 80, icon: SiRedux },
-        { name: "jQuery", level: 70, icon: SiJquery },
-        { name: "EJS", level: 65, icon: SiEjs },
+        { name: "React", level: 80, icon: SiReact },
+        { name: "Next.js", level: 80, icon: SiNextdotjs },
+        { name: "TailwindCSS", level: 80, icon: SiTailwindcss },
+        { name: "Redux", level: 60, icon: SiRedux },
+        { name: "jQuery", level: 60, icon: SiJquery },
+        { name: "Handlebars", level: 80, icon: SiHandlebarsdotjs },
+        { name: "EJS", level: 30, icon: SiEjs },
       ]
     },
     {
       name: "Backend & Databases",
       skills: [
-        { name: "Node.js", level: 90, icon: SiNodeJs },
+        { name: "Node.js", level: 85, icon: SiNodeJs },
         { name: "Express.js", level: 85, icon: SiExpress },
-        { name: ".NET", level: 80, icon: SiDotnet },
-        { name: "Socket.io", level: 70, icon: SiSocketdotio },
+        { name: ".NET", level: 60, icon: SiDotnet },
+        { name: "Socket.io", level: 50, icon: SiSocketdotio },
         { name: "PostgreSQL", level: 80, icon: SiPostgresql },
-        { name: "MongoDB", level: 75, icon: SiMongodb },
-        { name: "MySQL", level: 70, icon: SiMysql },
+        { name: "MySQL", level: 60, icon: SiMysql },
       ]
     },
     {
       name: "Tools & Frameworks",
       skills: [
-        { name: "Git", level: 90, icon: SiGit },
-        { name: "Nginx", level: 75, icon: SiNginx },
-        { name: "NPM", level: 70, icon: SiNpm },
-        { name: "Qt", level: 65, icon: SiQt },
+        { name: "Git", level: 85, icon: SiGit },
+        { name: "Nginx", level: 70, icon: SiNginx },
+        { name: "NPM", level: 80, icon: SiNpm },
+        { name: "Qt", level: 50, icon: SiQt },
       ]
     },
     {
       name: "Design & 3D Tools",
       skills: [
-        { name: "Blender", level: 85, icon: SiBlender },
-        { name: "Unreal Engine", level: 95, icon: SiUnrealengine },
-        { name: "Adobe Photoshop", level: 80, icon: SiAdobephotoshop },
-        { name: "Adobe Illustrator", level: 75, icon: SiAdobeillustrator },
-        { name: "Adobe XD", level: 70, icon: SiAdobexd },
+        { name: "Blender", level: 90, icon: SiBlender },
+        { name: "Unreal Engine", level: 75, icon: SiUnrealengine },
+        { name: "Adobe Photoshop", level: 60, icon: SiAdobephotoshop },
+        { name: "Adobe Illustrator", level: 60, icon: SiAdobeillustrator },
+        { name: "Adobe XD", level: 60, icon: SiAdobexd },
       ]
     }
   ]
