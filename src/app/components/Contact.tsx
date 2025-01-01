@@ -16,6 +16,7 @@ import {
   DialogHeader,
   DialogTitle
 } from '@/src/app/components/ui/dialog'
+import { sendEmail } from '@/src/app/components/actions/sendEmail'
 
 interface ContactModalProps {
   isOpen: boolean
@@ -34,17 +35,28 @@ export default function Contact({
   const [isSuccess, setIsSuccess] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
 
-  const handleSubmit = () => {
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault()
     if (!name || !email || !message) {
       alert('Please fill in all fields')
       return
     }
     setIsLoading(true)
 
-    setTimeout(() => {
+    const formData = new FormData()
+    formData.append('name', name)
+    formData.append('email', email)
+    formData.append('message', message)
+
+    try {
+      const result = await sendEmail(formData)
       setIsLoading(false)
-      setIsSuccess(true)
-    }, 2000)
+      setIsSuccess(result.success)
+    } catch (error) {
+      console.error('Failed to send email:', error)
+      setIsLoading(false)
+      alert('Failed to send message. Please try again.')
+    }
   }
 
   return (
