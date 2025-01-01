@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect, Dispatch, SetStateAction } from 'react'
-import Link from 'next/link'
 import { Menu, X } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Button from '@/src/app/components/ui/button'
