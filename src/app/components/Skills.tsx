@@ -165,7 +165,7 @@ export default function Skills() {
   ]
 
   return (
-    <section ref={ref} className="py-20 relative overflow-hidden bg-gray-800/50 backdrop-blur-sm">
+    <section ref={ref} className="py-24 relative overflow-hidden bg-gray-800/50 backdrop-blur-sm">
       <div className="container mx-auto px-4">
         <motion.h2 
           className="text-4xl font-bold mb-16 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-600"

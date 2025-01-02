@@ -16,7 +16,7 @@ export default function Footer({ onSkills, onWork, onAbout }: StartContactProps)
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h3 className="mb-4 text-lg font-semibold text-white">DanielOM99</h3>
+          <h3 className="mb-4 text-lg font-semibold text-white">DanielOM999</h3>
           <p className="text-sm leading-6">
             Hi! I am Daniel Olov Mostad, a dedicated IT student in his second
             year of vocational high school. I am passionate about programming,
@@ -91,7 +91,7 @@ export default function Footer({ onSkills, onWork, onAbout }: StartContactProps)
           animate={{ opacity: 1 }}
           transition={{ duration: 1.2, delay: 0.4 }}
         >
-          &copy; {new Date().getFullYear()} SwiftBinderUB. All rights reserved.
+          &copy; {new Date().getFullYear()} DanielOM999. All rights reserved.
         </motion.p>
       </div>
     </footer>
