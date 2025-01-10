@@ -31,7 +31,7 @@ export default function NotFound() {
           repeat={Infinity}
         />
         <p className="text-xl mb-8">
-          Oops! It seems you've ventured into an unexplored dimension.
+          Oops! It seems you&apos;ve ventured into an unexplored dimension.
         </p>
         <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
           <Link
@@ -50,7 +50,7 @@ export default function NotFound() {
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10"
       >
         <p className="text-sm text-gray-400">
-          Lost? Don't worry, even the best explorers sometimes drift off course.
+          Lost? Don&apos;t worry, even the best explorers sometimes drift off course.
         </p>
       </motion.div>
     </section>
