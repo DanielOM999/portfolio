@@ -1,12 +1,16 @@
 import { motion } from "framer-motion";
 
 interface StartContactProps {
-  onSkills: () => void
-  onWork: () => void
-  onAbout: () => void
+  onSkills: () => void;
+  onWork: () => void;
+  onAbout: () => void;
 }
 
-export default function Footer({ onSkills, onWork, onAbout }: StartContactProps) {
+export default function Footer({
+  onSkills,
+  onWork,
+  onAbout,
+}: StartContactProps) {
   return (
     <footer className="mt-20 border-t border-white/10 bg-background py-10 text-gray-200">
       <div className="container mx-auto grid gap-8 px-4 md:grid-cols-3">
@@ -79,7 +83,10 @@ export default function Footer({ onSkills, onWork, onAbout }: StartContactProps)
           <ul className="space-y-2">
             <li>3 years at Svensedammen Secondary School</li>
             <li>2 years at Åssiden High School</li>
-            <li>Specialized in Information Technology and Media Production (Year 1)</li>
+            <li>
+              Specialized in Information Technology and Media Production (Year
+              1)
+            </li>
             <li>Specialized in Information Technology (Year 2)</li>
           </ul>
         </motion.div>

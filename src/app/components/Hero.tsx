@@ -1,12 +1,12 @@
-'use client'
+"use client";
 
-import { motion } from 'framer-motion'
-import { TypeAnimation } from 'react-type-animation'
-import Image from 'next/image'
-import Constellation from '@/src/app/components/Constellation'
+import { motion } from "framer-motion";
+import { TypeAnimation } from "react-type-animation";
+import Image from "next/image";
+import Constellation from "@/src/app/components/Constellation";
 
 interface HeroProps {
-  onExplore: () => void
+  onExplore: () => void;
 }
 
 export default function Hero({ onExplore }: HeroProps) {
@@ -22,11 +22,11 @@ export default function Hero({ onExplore }: HeroProps) {
         <h1 className="text-5xl font-bold mb-4">Hi, I&apos;m Daniel!</h1>
         <TypeAnimation
           sequence={[
-            'I turn blank screens into 3D worlds',
+            "I turn blank screens into 3D worlds",
             1000,
-            'I build scalable web apps',
+            "I build scalable web apps",
             1000,
-            'I create immersive experiences',
+            "I create immersive experiences",
             1000,
           ]}
           wrapper="h2"
@@ -61,5 +61,5 @@ export default function Hero({ onExplore }: HeroProps) {
         </div>
       </motion.div>
     </section>
-  )
+  );
 }

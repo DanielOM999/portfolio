@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import Image from 'next/image';
-import { ArrowRight } from 'lucide-react';
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
+import { ArrowRight } from "lucide-react";
 
 interface Project {
   id: number;
@@ -17,19 +17,25 @@ export default function Projects() {
   const [projects] = useState<Project[]>([
     {
       id: 1,
-      title: 'Large File Storage and Sharing',
+      title: "Large File Storage and Sharing",
       description:
-        'A program for storing and sharing large files using Next.js, Tailwind, Node, PostgreSQL, and Redux.',
-      technologies: ['Next.js', 'Tailwind CSS', 'Node.js', 'PostgreSQL', 'Redux'],
-      image: '/img/image.png?height=300&width=400',
+        "A program for storing and sharing large files using Next.js, Tailwind, Node, PostgreSQL, and Redux.",
+      technologies: [
+        "Next.js",
+        "Tailwind CSS",
+        "Node.js",
+        "PostgreSQL",
+        "Redux",
+      ],
+      image: "/img/image.png?height=300&width=400",
     },
     {
       id: 2,
-      title: 'E-commerce Platform',
+      title: "E-commerce Platform",
       description:
-        'A fully-featured e-commerce platform built with React, Express, and MongoDB, featuring real-time inventory updates and secure payment processing.',
-      technologies: ['React', 'Express', 'MongoDB', 'Stripe', 'Socket.io'],
-      image: '/img/image.png?height=300&width=400',
+        "A fully-featured e-commerce platform built with React, Express, and MongoDB, featuring real-time inventory updates and secure payment processing.",
+      technologies: ["React", "Express", "MongoDB", "Stripe", "Socket.io"],
+      image: "/img/image.png?height=300&width=400",
     },
   ]);
 
@@ -62,20 +68,24 @@ export default function Projects() {
                 exit={{ opacity: 0, y: -100 }}
                 transition={{ duration: 0.8, delay: index * 0.2 }}
                 className={`relative ${
-                  index % 2 === 0 ? 'mr-auto' : 'ml-auto'
+                  index % 2 === 0 ? "mr-auto" : "ml-auto"
                 } max-w-3xl`}
                 onMouseEnter={() => setHoveredProject(project.id)}
                 onMouseLeave={() => setHoveredProject(null)}
               >
                 <div
                   className={`flex flex-col ${
-                    index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
+                    index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
                   } gap-8 items-center
                   p-8 rounded-2xl
                   bg-gray-800/50 backdrop-blur-sm
                   border border-gray-700/50
                   transition-all duration-500
-                  ${hoveredProject === project.id ? 'bg-gray-800/80 scale-[1.02]' : ''}`}
+                  ${
+                    hoveredProject === project.id
+                      ? "bg-gray-800/80 scale-[1.02]"
+                      : ""
+                  }`}
                 >
                   <div className="relative w-full md:w-[400px] aspect-video">
                     <div className="absolute -inset-4 bg-blue-500/20 rounded-2xl blur-2xl transition-opacity duration-500 opacity-0 group-hover:opacity-100" />
@@ -90,7 +100,9 @@ export default function Projects() {
                   </div>
 
                   <div className="flex-1 space-y-4 max-w-sm">
-                    <h3 className="text-2xl font-semibold text-blue-400">{project.title}</h3>
+                    <h3 className="text-2xl font-semibold text-blue-400">
+                      {project.title}
+                    </h3>
                     <p className="text-gray-300">{project.description}</p>
                     <div className="flex flex-wrap gap-2">
                       {project.technologies.map((tech, techIndex) => (

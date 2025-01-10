@@ -1,8 +1,12 @@
-'use client'
+"use client";
 
-import React from 'react'
+import React from "react";
 
-export const Label: React.FC<React.LabelHTMLAttributes<HTMLLabelElement>> = ({ className, children, ...props }) => {
+export const Label: React.FC<React.LabelHTMLAttributes<HTMLLabelElement>> = ({
+  className,
+  children,
+  ...props
+}) => {
   return (
     <label
       {...props}
@@ -10,5 +14,5 @@ export const Label: React.FC<React.LabelHTMLAttributes<HTMLLabelElement>> = ({ c
     >
       {children}
     </label>
-  )
-}
+  );
+};

@@ -1,8 +1,8 @@
-'use client'
+"use client";
 
-import { useRef, useState } from 'react'
-import { motion, AnimatePresence, useInView } from 'framer-motion'
-import { ChevronDown } from 'lucide-react'
+import { useRef, useState } from "react";
+import { motion, AnimatePresence, useInView } from "framer-motion";
+import { ChevronDown } from "lucide-react";
 import {
   SiHtml5,
   SiCss3,
@@ -30,27 +30,27 @@ import {
   SiJquery,
   SiNpm,
   SiUnrealengine,
-  SiHandlebarsdotjs
-} from 'react-icons/si'
-import { PiFileCSharp as SiCSharp } from "react-icons/pi"
-import { FaJava as SiJava } from "react-icons/fa"
-import { FaNodeJs as SiNodeJs } from "react-icons/fa"
-import { DiMysql as SiMysql } from "react-icons/di"
+  SiHandlebarsdotjs,
+} from "react-icons/si";
+import { PiFileCSharp as SiCSharp } from "react-icons/pi";
+import { FaJava as SiJava } from "react-icons/fa";
+import { FaNodeJs as SiNodeJs } from "react-icons/fa";
+import { DiMysql as SiMysql } from "react-icons/di";
 
 interface Skill {
-  name: string
-  level: number
-  icon: React.ComponentType<{ className?: string }>
+  name: string;
+  level: number;
+  icon: React.ComponentType<{ className?: string }>;
 }
 
 interface SkillCategory {
-  name: string
-  skills: Skill[]
+  name: string;
+  skills: Skill[];
 }
 
 const SkillCard = ({ skill, index }: { skill: Skill; index: number }) => {
-  const Icon = skill.icon
-  
+  const Icon = skill.icon;
+
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.6, y: 20 }}
@@ -59,7 +59,7 @@ const SkillCard = ({ skill, index }: { skill: Skill; index: number }) => {
       transition={{
         duration: 0.4,
         delay: index * 0.05,
-        ease: [0.23, 1, 0.32, 1]
+        ease: [0.23, 1, 0.32, 1],
       }}
       className="group relative"
     >
@@ -68,12 +68,12 @@ const SkillCard = ({ skill, index }: { skill: Skill; index: number }) => {
           <motion.div
             animate={{
               rotate: [0, 10, -10, 0],
-              scale: [1, 1.1, 1]
+              scale: [1, 1.1, 1],
             }}
             transition={{
               duration: 0.5,
               delay: index * 0.05,
-              ease: "easeInOut"
+              ease: "easeInOut",
             }}
           >
             <Icon className="w-8 h-8 text-blue-400 group-hover:text-blue-300 transition-colors" />
@@ -81,13 +81,13 @@ const SkillCard = ({ skill, index }: { skill: Skill; index: number }) => {
           <span className="text-sm font-medium text-gray-300 group-hover:text-white transition-colors">
             {skill.name}
           </span>
-          <motion.div 
+          <motion.div
             className="h-1 bg-blue-400/20 rounded-full w-16 overflow-hidden"
             initial={{ width: 0 }}
             animate={{ width: "4rem" }}
             transition={{ duration: 0.6, delay: index * 0.05 }}
           >
-            <motion.div 
+            <motion.div
               className="h-full bg-blue-400"
               initial={{ width: 0 }}
               animate={{ width: `${skill.level}%` }}
@@ -97,13 +97,13 @@ const SkillCard = ({ skill, index }: { skill: Skill; index: number }) => {
         </div>
       </div>
     </motion.div>
-  )
-}
+  );
+};
 
 export default function Skills() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true })
-  const [openCategory, setOpenCategory] = useState<string | null>(null)
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+  const [openCategory, setOpenCategory] = useState<string | null>(null);
 
   const skillCategories: SkillCategory[] = [
     {
@@ -116,7 +116,7 @@ export default function Skills() {
         { name: "TypeScript", level: 80, icon: SiTypescript },
         { name: "Java", level: 60, icon: SiJava },
         { name: "Lua", level: 60, icon: SiLua },
-      ]
+      ],
     },
     {
       name: "Frontend Development",
@@ -130,7 +130,7 @@ export default function Skills() {
         { name: "jQuery", level: 60, icon: SiJquery },
         { name: "Handlebars", level: 80, icon: SiHandlebarsdotjs },
         { name: "EJS", level: 30, icon: SiEjs },
-      ]
+      ],
     },
     {
       name: "Backend & Databases",
@@ -141,7 +141,7 @@ export default function Skills() {
         { name: "Socket.io", level: 50, icon: SiSocketdotio },
         { name: "PostgreSQL", level: 80, icon: SiPostgresql },
         { name: "MySQL", level: 60, icon: SiMysql },
-      ]
+      ],
     },
     {
       name: "Tools & Frameworks",
@@ -150,7 +150,7 @@ export default function Skills() {
         { name: "Nginx", level: 70, icon: SiNginx },
         { name: "NPM", level: 80, icon: SiNpm },
         { name: "Qt", level: 50, icon: SiQt },
-      ]
+      ],
     },
     {
       name: "Design & 3D Tools",
@@ -160,14 +160,17 @@ export default function Skills() {
         { name: "Adobe Photoshop", level: 60, icon: SiAdobephotoshop },
         { name: "Adobe Illustrator", level: 60, icon: SiAdobeillustrator },
         { name: "Adobe XD", level: 60, icon: SiAdobexd },
-      ]
-    }
-  ]
+      ],
+    },
+  ];
 
   return (
-    <section ref={ref} className="py-24 relative overflow-hidden bg-gray-800/50 backdrop-blur-sm">
+    <section
+      ref={ref}
+      className="py-24 relative overflow-hidden bg-gray-800/50 backdrop-blur-sm"
+    >
       <div className="container mx-auto px-4">
-        <motion.h2 
+        <motion.h2
           className="text-4xl font-bold mb-16 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-600"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -187,7 +190,11 @@ export default function Skills() {
             >
               <motion.button
                 className="w-full text-left p-4 rounded-lg bg-gray-800/80 backdrop-blur-sm border border-gray-700/50 hover:border-blue-500/50 transition-colors flex items-center justify-between group"
-                onClick={() => setOpenCategory(openCategory === category.name ? null : category.name)}
+                onClick={() =>
+                  setOpenCategory(
+                    openCategory === category.name ? null : category.name
+                  )
+                }
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
@@ -214,10 +221,10 @@ export default function Skills() {
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 p-4">
                       <AnimatePresence>
                         {category.skills.map((skill, skillIndex) => (
-                          <SkillCard 
-                            key={skill.name} 
-                            skill={skill} 
-                            index={skillIndex} 
+                          <SkillCard
+                            key={skill.name}
+                            skill={skill}
+                            index={skillIndex}
                           />
                         ))}
                       </AnimatePresence>
@@ -230,5 +237,5 @@ export default function Skills() {
         </div>
       </div>
     </section>
-  )
+  );
 }
