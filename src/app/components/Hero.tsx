@@ -17,7 +17,7 @@ export default function Hero({ onExplore }: HeroProps) {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="flex-1 z-10"
+        className="flex-1 z-10 md:ml-[400px]"
       >
         <h1 className="text-5xl font-bold mb-4">Hi, I&apos;m Daniel!</h1>
         <TypeAnimation
