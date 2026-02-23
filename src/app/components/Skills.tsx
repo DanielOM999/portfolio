@@ -12,6 +12,7 @@ import {
   SiTypescript,
   SiPython,
   SiCplusplus,
+  SiC,
   SiLua,
   SiBlender,
   SiExpress,
@@ -31,6 +32,8 @@ import {
   SiNpm,
   SiUnrealengine,
   SiHandlebarsdotjs,
+  SiVuedotjs,
+  SiMariadb,
 } from "react-icons/si";
 import { PiFileCSharp as SiCSharp } from "react-icons/pi";
 import { FaJava as SiJava } from "react-icons/fa";
@@ -109,7 +112,8 @@ export default function Skills() {
     {
       name: "Programming Languages",
       skills: [
-        { name: "C#", level: 80, icon: SiCSharp },
+        { name: "C#", level: 85, icon: SiCSharp },
+        { name: "C", level: 50, icon: SiC },
         { name: "C++", level: 60, icon: SiCplusplus },
         { name: "JavaScript", level: 90, icon: SiJavascript },
         { name: "Python", level: 90, icon: SiPython },
@@ -125,6 +129,7 @@ export default function Skills() {
         { name: "CSS3", level: 90, icon: SiCss3 },
         { name: "React", level: 80, icon: SiReact },
         { name: "Next.js", level: 80, icon: SiNextdotjs },
+        { name: "Vue.js", level: 60, icon: SiVuedotjs },
         { name: "TailwindCSS", level: 80, icon: SiTailwindcss },
         { name: "Redux", level: 60, icon: SiRedux },
         { name: "jQuery", level: 60, icon: SiJquery },
@@ -137,9 +142,10 @@ export default function Skills() {
       skills: [
         { name: "Node.js", level: 85, icon: SiNodeJs },
         { name: "Express.js", level: 85, icon: SiExpress },
-        { name: ".NET", level: 60, icon: SiDotnet },
+        { name: "ASP.NET", level: 70, icon: SiDotnet },
         { name: "Socket.io", level: 50, icon: SiSocketdotio },
         { name: "PostgreSQL", level: 80, icon: SiPostgresql },
+        { name: "MariaDB", level: 60, icon: SiMariadb },
         { name: "MySQL", level: 60, icon: SiMysql },
       ],
     },
@@ -179,60 +185,67 @@ export default function Skills() {
           Skills & Expertise
         </motion.h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {skillCategories.map((category, categoryIndex) => (
-            <motion.div
-              key={category.name}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
-              className="relative"
-            >
-              <motion.button
-                className="w-full text-left p-4 rounded-lg bg-gray-800/80 backdrop-blur-sm border border-gray-700/50 hover:border-blue-500/50 transition-colors flex items-center justify-between group"
-                onClick={() =>
-                  setOpenCategory(
-                    openCategory === category.name ? null : category.name
-                  )
-                }
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <h3 className="text-xl font-medium text-blue-400 group-hover:text-blue-300 transition-colors">
-                  {category.name}
-                </h3>
+        <div className="flex flex-col md:flex-row gap-8">
+          {[
+            skillCategories.filter((_, i) => i % 2 === 0),
+            skillCategories.filter((_, i) => i % 2 === 1),
+          ].map((column, colIndex) => (
+            <div key={colIndex} className="flex-1 flex flex-col gap-8">
+              {column.map((category, categoryIndex) => (
                 <motion.div
-                  animate={{ rotate: openCategory === category.name ? 180 : 0 }}
-                  transition={{ duration: 0.3 }}
+                  key={category.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.6, delay: (colIndex + categoryIndex * 2) * 0.1 }}
+                  className="relative"
                 >
-                  <ChevronDown className="w-5 h-5 text-blue-400 group-hover:text-blue-300 transition-colors" />
-                </motion.div>
-              </motion.button>
-
-              <AnimatePresence>
-                {openCategory === category.name && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                    className="overflow-hidden"
+                  <motion.button
+                    className="w-full text-left p-4 rounded-lg bg-gray-800/80 backdrop-blur-sm border border-gray-700/50 hover:border-blue-500/50 transition-colors flex items-center justify-between group"
+                    onClick={() =>
+                      setOpenCategory(
+                        openCategory === category.name ? null : category.name
+                      )
+                    }
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                   >
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 p-4">
-                      <AnimatePresence>
-                        {category.skills.map((skill, skillIndex) => (
-                          <SkillCard
-                            key={skill.name}
-                            skill={skill}
-                            index={skillIndex}
-                          />
-                        ))}
-                      </AnimatePresence>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
+                    <h3 className="text-xl font-medium text-blue-400 group-hover:text-blue-300 transition-colors">
+                      {category.name}
+                    </h3>
+                    <motion.div
+                      animate={{ rotate: openCategory === category.name ? 180 : 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <ChevronDown className="w-5 h-5 text-blue-400 group-hover:text-blue-300 transition-colors" />
+                    </motion.div>
+                  </motion.button>
+
+                  <AnimatePresence>
+                    {openCategory === category.name && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                        className="overflow-hidden"
+                      >
+                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 p-4">
+                          <AnimatePresence>
+                            {category.skills.map((skill, skillIndex) => (
+                              <SkillCard
+                                key={skill.name}
+                                skill={skill}
+                                index={skillIndex}
+                              />
+                            ))}
+                          </AnimatePresence>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+              ))}
+            </div>
           ))}
         </div>
       </div>

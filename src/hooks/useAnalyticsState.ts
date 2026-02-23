@@ -4,7 +4,11 @@ import { useState, useEffect } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 
 export function useAnalyticsState() {
-  const [isEnabled, setIsEnabled] = useState(false);
+  const [isEnabled, setIsEnabled] = useState(() => {
+    if (typeof window === "undefined") return false;
+    const stored = localStorage.getItem("analyticsEnabled");
+    return stored !== null ? JSON.parse(stored) : false;
+  });
   const [isVisible, setIsVisible] = useState(true);
   const [hasInitialized, setHasInitialized] = useState(false);
 
@@ -16,9 +20,6 @@ export function useAnalyticsState() {
 
   useEffect(() => {
     const storedState = localStorage.getItem("analyticsEnabled");
-    if (storedState !== null) {
-      setIsEnabled(JSON.parse(storedState));
-    }
 
     const timer = setTimeout(() => {
       setHasInitialized(true);
@@ -37,9 +38,12 @@ export function useAnalyticsState() {
   }, [isEnabled, hasInitialized]);
 
   useEffect(() => {
-    setIsVisible(true);
-    const timer = setTimeout(() => setIsVisible(false), 5000);
-    return () => clearTimeout(timer);
+    const showTimer = setTimeout(() => setIsVisible(true), 0);
+    const hideTimer = setTimeout(() => setIsVisible(false), 5000);
+    return () => {
+      clearTimeout(showTimer);
+      clearTimeout(hideTimer);
+    };
   }, [path, search]);
 
   const toggleAnalytics = () => setIsEnabled(!isEnabled);

@@ -23,6 +23,7 @@ export default function Header({
   onAbout,
 }: StartContactProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -38,14 +39,27 @@ export default function Header({
     };
   }, []);
 
+  useEffect(() => {
+    function handleScroll() {
+      setIsScrolled(window.scrollY > 50);
+    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const handleContactToggle = (event: React.MouseEvent<HTMLButtonElement>) => {
     setClickPosition({ x: event.clientX, y: event.clientY });
     setIsContact(!isContact);
   };
 
   return (
-    <header className="fixed top-0 z-50 w-full">
-      <nav className="container mx-auto px-14 py-5">
+    <header
+      className={`fixed top-0 z-50 w-full transition-all duration-300 ${
+        isScrolled ? "header-scrolled" : ""
+      }`}
+    >
+      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
         <div className="flex items-center justify-between">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -54,7 +68,7 @@ export default function Header({
           >
             <button
               onClick={onHero}
-              className="flex items-center gap-2 text-xl font-bold"
+              className="cursor-pointer flex items-center gap-2 text-xl font-bold"
             >
               DanielOM999
             </button>
@@ -78,7 +92,7 @@ export default function Header({
                   >
                     <button
                       onClick={handleClick}
-                      className="transition-colors hover:text-white/85"
+                      className="cursor-pointer transition-colors hover:text-blue-400"
                     >
                       {item}
                     </button>
@@ -93,7 +107,7 @@ export default function Header({
             >
               <Button
                 variant="outline"
-                className="border-secondary text-secondary hover:bg-primary hover:text-black"
+                className="border-blue-400/50 text-blue-400 hover:bg-blue-500 hover:text-white hover:border-blue-500"
                 onClick={handleContactToggle}
               >
                 Contact
@@ -117,7 +131,7 @@ export default function Header({
             <AnimatePresence>
               {isMenuOpen && (
                 <motion.div
-                  className="absolute right-0 top-full mt-2 w-36 rounded-lg p-4 shadow-lg backdrop-blur-sm"
+                  className="absolute right-0 top-full mt-2 w-36 rounded-xl glass-card p-4 shadow-lg"
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
@@ -142,7 +156,7 @@ export default function Header({
                         >
                           <button
                             onClick={handleClick}
-                            className="transition-colors hover:text-secondary"
+                            className="cursor-pointer transition-colors hover:text-blue-400"
                           >
                             {item}
                           </button>

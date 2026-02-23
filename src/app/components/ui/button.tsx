@@ -12,11 +12,11 @@ const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   const baseStyles =
-    "px-4 py-2 rounded-2xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/50";
+    "cursor-pointer px-4 py-2 rounded-2xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/50";
 
   const variantStyles =
     variant === "outline"
-      ? "border border-white/70 text-white/70 hover:bg-white hover:text-black"
+      ? "border border-white/70 text-white/70"
       : "bg-white text-black hover:bg-white/90";
 
   return (

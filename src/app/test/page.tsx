@@ -27,7 +27,7 @@ export default function Projects() {
         "PostgreSQL",
         "Redux",
       ],
-      image: "/img/image.png?height=300&width=400",
+      image: "/img/image.png",
     },
     {
       id: 2,
@@ -35,7 +35,7 @@ export default function Projects() {
       description:
         "A fully-featured e-commerce platform built with React, Express, and MongoDB, featuring real-time inventory updates and secure payment processing.",
       technologies: ["React", "Express", "MongoDB", "Stripe", "Socket.io"],
-      image: "/img/image.png?height=300&width=400",
+      image: "/img/image.png",
     },
   ]);
 

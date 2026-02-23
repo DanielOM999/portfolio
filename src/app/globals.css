@@ -1,6 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@config "../../tailwind.config.ts";
 
 html.lenis,
 html.lenis body {
@@ -61,10 +60,8 @@ body {
   );
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+@utility text-balance {
+  text-wrap: balance;
 }
 
 .fixed > span:first-of-type {
@@ -74,4 +71,49 @@ body {
 
 .fixed:hover > span:first-of-type {
   transform: scale(1);
+}
+
+/* Glass-morphism card for dialogs */
+.glass-card {
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 0 30px rgba(59, 130, 246, 0.08),
+    0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+/* Gradient text utility */
+.gradient-text {
+  background: linear-gradient(135deg, #93c5fd 0%, #3b82f6 50%, #1d4ed8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Subtle glow on buttons */
+.glow-blue {
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.35), 0 0 60px rgba(59, 130, 246, 0.1);
+}
+
+/* Image glow frame */
+.image-glow {
+  box-shadow:
+    0 0 40px rgba(59, 130, 246, 0.15),
+    0 0 80px rgba(59, 130, 246, 0.08);
+}
+
+/* Input focus glow */
+.input-glow:focus-within {
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+  border-color: rgba(96, 165, 250, 0.5);
+}
+
+/* Header scroll state */
+.header-scrolled {
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }

@@ -34,7 +34,7 @@ export default function Constellation() {
 
     const particleCount = 45;
     const particles: Particle[] = [];
-    const colors = ["#3b82f6", "2479fe", "6aa4ff", "c1d9ff"];
+    const colors = ["#3b82f6", "#2479fe", "#6aa4ff", "#c1d9ff"];
     const connectionDistance = 150;
     const particleSize = 3;
     const particleSpeed = 1;
@@ -53,7 +53,8 @@ export default function Constellation() {
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      particles.forEach((particle) => {
+      for (let i = 0; i < particles.length; i++) {
+        const particle = particles[i];
         particle.x += particle.vx;
         particle.y += particle.vy;
 
@@ -65,23 +66,24 @@ export default function Constellation() {
         ctx.fillStyle = particle.color;
         ctx.fill();
 
-        particles.forEach((otherParticle) => {
-          const dx = particle.x - otherParticle.x;
-          const dy = particle.y - otherParticle.y;
+        for (let j = i + 1; j < particles.length; j++) {
+          const other = particles[j];
+          const dx = particle.x - other.x;
+          const dy = particle.y - other.y;
           const distance = Math.sqrt(dx * dx + dy * dy);
 
           if (distance < connectionDistance) {
             ctx.beginPath();
             ctx.moveTo(particle.x, particle.y);
-            ctx.lineTo(otherParticle.x, otherParticle.y);
+            ctx.lineTo(other.x, other.y);
             ctx.strokeStyle = `rgba(151, 186, 244, ${
               1 - distance / connectionDistance
             })`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
-        });
-      });
+        }
+      }
 
       frameId = requestAnimationFrame(animate);
     };

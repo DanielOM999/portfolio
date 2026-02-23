@@ -13,7 +13,7 @@ export default function Footer({
 }: StartContactProps) {
   return (
     <footer className="mt-20 border-t border-white/10 bg-background py-10 text-gray-200">
-      <div className="container mx-auto grid gap-8 px-4 md:grid-cols-3">
+      <div className="max-w-6xl mx-auto grid gap-8 px-4 md:grid-cols-3">
         {/* About Section */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
@@ -22,15 +22,17 @@ export default function Footer({
         >
           <h3 className="mb-4 text-lg font-semibold text-white">DanielOM999</h3>
           <p className="text-sm leading-6">
-            Hi! I am Daniel Olov Mostad, a dedicated IT student in his second
-            year of vocational high school. I am passionate about programming,
-            3D design, and backend development.
+            Hi! I am Daniel Olov Mostad, an IT Developer Apprentice at Visma
+            Flyt. Driven by the joy of creating — from problem-solving with code
+            to building 3D worlds.
           </p>
           <div className="mt-4 flex gap-4">
             <a
               href="https://github.com/DanielOM999"
+              target="_blank"
+              rel="noopener noreferrer"
               aria-label="GitHub"
-              className="hover:text-white/75 transition-colors"
+              className="hover:text-blue-400 transition-colors"
             >
               <svg
                 className="h-6 w-6"
@@ -63,7 +65,7 @@ export default function Footer({
                 <li key={index}>
                   <button
                     onClick={handleClick}
-                    className="transition-colors cursor-pointer hover:text-white/75"
+                    className="cursor-pointer transition-colors hover:text-blue-400"
                   >
                     {link}
                   </button>
@@ -80,7 +82,7 @@ export default function Footer({
           transition={{ duration: 0.6, delay: 0.2 }}
         >
           <h3 className="mb-4 text-lg font-semibold text-white">Education</h3>
-          <ul className="space-y-2">
+          <ul className="space-y-3">
             <li>3 years at Svensedammen Secondary School</li>
             <li>2 years at Åssiden High School</li>
             <li>
@@ -88,6 +90,7 @@ export default function Footer({
               1)
             </li>
             <li>Specialized in Information Technology (Year 2)</li>
+            <li>IT Developer Apprentice at Visma Flyt (2025–2027)</li>
           </ul>
         </motion.div>
       </div>
