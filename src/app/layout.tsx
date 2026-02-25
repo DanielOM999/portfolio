@@ -9,9 +9,9 @@ const inter = Inter({
 });
 
 export const metadata = {
-  title: "Daniel Olov Mostad",
+  title: "Zingico - Daniel Olov Mostad",
   description:
-    "Hi, I’m Daniel Mostad, a passionate IT student with expertise in programming, development, and 3D design. Explore my skills, projects, and contact information.",
+    "Hi, I'm Daniel Mostad, a passionate IT student with expertise in programming, development, and 3D design. Explore my skills, projects, and contact information.",
   keywords: [
     "Daniel Olov Mostad",
     "Portfolio",
@@ -26,14 +26,17 @@ export const metadata = {
     "Graphic design",
     "Software engineering",
     "IT enthusiast",
+    "Developer",
+    "Designer",
+    "Zingico"
   ],
   authors: [{ name: "Daniel Olov Mostad", email: "daniel.mostad1@gmail.com" }],
-  metadataBase: new URL("https://www.danielom999.org"),
+  metadataBase: new URL("https://www.zingico.com/"),
   openGraph: {
     title: "Daniel Olov Mostad",
     description:
       "Discover the portfolio of Daniel Mostad, an aspiring IT professional with a strong foundation in programming, database management, and 3D design.",
-    url: "https://www.danielom999.org/",
+    url: "https://www.zingico.com/",
     siteName: "Daniel Olov Mostad",
     images: [
       {
