@@ -101,7 +101,14 @@ export default function Footer({
           animate={{ opacity: 1 }}
           transition={{ duration: 1.2, delay: 0.4 }}
         >
-          &copy; {new Date().getFullYear()} DanielOM999. All rights reserved.
+          &copy; {new Date().getFullYear()}{" "}
+          <a
+            href="https://www.zingico.com/"
+            className="hover:text-blue-400 transition-colors"
+          >
+            Zingico
+          </a>
+          . All rights reserved.
         </motion.p>
       </div>
     </footer>

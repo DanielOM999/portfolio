@@ -105,12 +105,11 @@ export default function Contact({ isOpen, onClose }: ContactModalProps) {
               className="flex flex-col items-center justify-center space-y-4 py-12"
             >
               <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
+                initial={{ scale: 0, rotate: -45 }}
+                animate={{ scale: [0, 1.3, 0.9, 1.1, 1], rotate: 0 }}
                 transition={{
-                  type: "spring",
-                  stiffness: 200,
-                  damping: 12,
+                  duration: 0.7,
+                  ease: [0.34, 1.56, 0.64, 1],
                   delay: 0.1,
                 }}
                 className="relative"
@@ -221,13 +220,19 @@ export default function Contact({ isOpen, onClose }: ContactModalProps) {
                 </motion.div>
               )}
 
+              {/* Privacy notice */}
+              <p className="text-[11px] leading-relaxed text-gray-500">
+                Your information is only used to respond to your message and is
+                not shared with third parties.
+              </p>
+
               {/* Actions */}
               <div className="flex items-center justify-end gap-3 pt-2">
                 <Button
                   type="button"
                   variant="outline"
                   onClick={resetAndClose}
-                  className="border-white/10 text-gray-400 hover:bg-white/5 hover:text-white"
+                  className="border-blue-400/50 text-blue-400 hover:bg-blue-500 hover:text-white hover:border-blue-500"
                 >
                   Cancel
                 </Button>

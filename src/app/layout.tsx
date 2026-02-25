@@ -11,23 +11,25 @@ const inter = Inter({
 export const metadata = {
   title: "Zingico - Daniel Olov Mostad",
   description:
-    "Hi, I'm Daniel Mostad, a passionate IT student with expertise in programming, development, and 3D design. Explore my skills, projects, and contact information.",
+    "Hi, I'm Daniel Mostad — full-stack developer, 3D designer, and IT Developer Apprentice at Visma Flyt. Explore my skills, projects, and get in touch.",
   keywords: [
     "Daniel Olov Mostad",
     "Portfolio",
-    "IT student",
+    "IT Developer Apprentice",
     "Full-stack development",
     "3D design",
-    "Python",
+    "C#",
+    "ASP.NET",
+    "Vue.js",
+    "Next.js",
     "Node.js",
     "PostgreSQL",
+    "MariaDB",
+    "Python",
     "Frontend development",
     "Unreal Engine",
-    "Graphic design",
     "Software engineering",
-    "IT enthusiast",
     "Developer",
-    "Designer",
     "Zingico"
   ],
   authors: [{ name: "Daniel Olov Mostad", email: "daniel.mostad1@gmail.com" }],
@@ -35,7 +37,7 @@ export const metadata = {
   openGraph: {
     title: "Daniel Olov Mostad",
     description:
-      "Discover the portfolio of Daniel Mostad, an aspiring IT professional with a strong foundation in programming, database management, and 3D design.",
+      "Portfolio of Daniel Mostad — full-stack developer and IT Developer Apprentice at Visma Flyt, working with C#, ASP.NET, Vue.js, Next.js, and more.",
     url: "https://www.zingico.com/",
     siteName: "Daniel Olov Mostad",
     images: [
@@ -52,7 +54,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Daniel Olov Mostad",
     description:
-      "Explore the projects, skills, and experience of Daniel Mostad, an IT student and aspiring developer.",
+      "Portfolio of Daniel Mostad — full-stack developer and IT Developer Apprentice working with C#, ASP.NET, Vue.js, Next.js, and more.",
     image: "/img/og.webp",
   },
   icons: {
