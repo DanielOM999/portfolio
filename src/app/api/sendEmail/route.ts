@@ -118,7 +118,15 @@ export async function POST(request: Request) {
 
   try {
     await transporter.verify();
+  } catch (error: unknown) {
+    console.error("SMTP authentication failed:", error);
+    return NextResponse.json(
+      { success: false, error: "Email service authentication failed. Please try again later." },
+      { status: 500 }
+    );
+  }
 
+  try {
     const htmlTemplate = await getTemplate();
     const htmlContent = htmlTemplate
       .replace("{{name}}", escapeHtml(name))

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Loader2, Check, User, Mail, MessageSquare, Send } from "lucide-react";
+import { Loader2, Check, User, Mail, MessageSquare, Send, AlertCircle } from "lucide-react";
 import Button from "@/src/app/components/ui/button";
 import {
   Dialog,
@@ -23,6 +23,7 @@ export default function Contact({ isOpen, onClose }: ContactModalProps) {
   const [message, setMessage] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -31,6 +32,7 @@ export default function Contact({ isOpen, onClose }: ContactModalProps) {
       return;
     }
     setIsLoading(true);
+    setError(null);
 
     try {
       const response = await fetch("/api/sendEmail", {
@@ -43,17 +45,21 @@ export default function Contact({ isOpen, onClose }: ContactModalProps) {
 
       const result = await response.json();
       setIsLoading(false);
-      setIsSuccess(result.success);
-    } catch (error) {
-      console.error("Failed to send email:", error);
+      if (result.success) {
+        setIsSuccess(true);
+      } else {
+        setError(result.error || "Something went wrong. Please try again.");
+      }
+    } catch {
       setIsLoading(false);
-      alert("Failed to send message. Please try again.");
+      setError("Failed to send message. Please check your connection and try again.");
     }
   };
 
   const resetAndClose = () => {
     onClose();
     setIsSuccess(false);
+    setError(null);
     setName("");
     setEmail("");
     setMessage("");
@@ -110,7 +116,7 @@ export default function Contact({ isOpen, onClose }: ContactModalProps) {
                 className="relative"
               >
                 <div className="absolute inset-0 rounded-full bg-green-500/20 blur-xl" />
-                <div className="relative rounded-full bg-gradient-to-br from-green-400 to-emerald-500 p-3">
+                <div className="relative rounded-full bg-linear-to-br from-green-400 to-emerald-500 p-3">
                   <Check className="h-6 w-6 text-white" />
                 </div>
               </motion.div>
@@ -202,6 +208,18 @@ export default function Contact({ isOpen, onClose }: ContactModalProps) {
                   </div>
                 </div>
               </div>
+
+              {/* Error message */}
+              {error && (
+                <motion.div
+                  initial={{ opacity: 0, y: -4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="flex items-center gap-2 rounded-xl border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm text-red-400"
+                >
+                  <AlertCircle className="h-4 w-4 shrink-0" />
+                  {error}
+                </motion.div>
+              )}
 
               {/* Actions */}
               <div className="flex items-center justify-end gap-3 pt-2">
